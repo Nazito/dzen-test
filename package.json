@@ -1,9 +1,8 @@
 {
   "name": "dzen_test",
   "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
+    "scripts": {
+     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,6 +11,7 @@
   },
   "dependencies": {
     "next": "14.2.3",
+    "next-pwa": "^5.6.0",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -21,12 +21,14 @@
     "@types/react-dom": "^18",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.3",
+    "eslint-config-prettier": "^9.0.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
+    "pinst": "^3.0.0",
     "prettier": "^3.2.5",
     "typescript": "^5"
-  },
-  "husky": {
+  }, 
+    "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
