@@ -1,0 +1,13 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+
+  &__text {
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #87c234;
+  }
+}

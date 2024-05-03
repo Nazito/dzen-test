@@ -1,0 +1,49 @@
+.productItem {
+  &__progress {
+    min-width: 10px;
+    min-height: 10px;
+    border-radius: 50%;
+    background-color: #86be47;
+  }
+
+  &__serial {
+    font-size: 10px;
+    margin-bottom: 0;
+  }
+
+  &__guaranteText {
+    width: 30px;
+    font-size: 12px;
+    color: #8e9ba2;
+    height: fit-content;
+  }
+
+  &__price {
+    font-size: 12px;
+    color: #8e9ba2;
+  }
+
+  &__groupName {
+    max-width: 200px;
+    word-wrap: break-word;
+  }
+
+  &__trash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.3s;
+
+    &:hover {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+  }
+}
