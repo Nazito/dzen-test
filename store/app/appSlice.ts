@@ -73,7 +73,7 @@ export const appSlice = createSlice({
     addOrderClose: (state) => {
       state.modals[EModals.AddOrder].active = false;
     },
-    addProductOpen: (state, action: PayloadAction<IAddOrderProps>) => {
+    addProductOpen: (state, action: PayloadAction<IAddProductProps>) => {
       state.modals[EModals.AddProduct].props.accept = action.payload.accept;
       state.modals[EModals.AddProduct].props.cancel = action.payload.cancel;
       state.modals[EModals.AddProduct].active = true;
