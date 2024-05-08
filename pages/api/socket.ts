@@ -3,13 +3,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Server } from 'socket.io';
 
-type Data = {
-  name: string;
-};
-
 let onlineUsers = [];
 
-export default function SocketHandler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default function SocketHandler(req: NextApiRequest, res: NextApiResponse) {
   //   It means that socket server was already initialised
   if (res?.socket?.server.io) {
     res.end();

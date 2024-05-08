@@ -1,3 +1,4 @@
+'use client';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 import io, { Socket } from 'socket.io-client';
