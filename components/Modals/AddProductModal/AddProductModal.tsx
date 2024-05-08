@@ -48,8 +48,6 @@ function AddProductModal() {
 
   const formData = watch();
 
-  console.log(formData);
-
   const closeModal = useCallback(() => {
     onAddProductClose();
   }, [onAddProductClose]);
