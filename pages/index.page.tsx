@@ -1,11 +1,8 @@
-// import { Inter } from 'next/font/google';
+import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-// import styles from '@/styles/Home.module.css';
-
-// const inter = Inter({ subsets: ['latin'] });
-
-export default function Home() {
+function Home() {
   return (
     <>
       <Head>
@@ -14,8 +11,18 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      {/* <main className={`${styles.main} ${inter.className}`}>777</main> */}
+
       <div>Home</div>
     </>
   );
 }
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(ctx.locale ?? 'en', ['common'])),
+    },
+  };
+}
+
+export default Home;

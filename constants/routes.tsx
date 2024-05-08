@@ -1,7 +1,7 @@
 export const ASIDE_ROUTES = [
-  { label: 'Orders', path: '/orders' },
-  { label: 'Groups', path: '/groups' },
-  { label: 'Products', path: '/products' },
-  { label: 'Users', path: '/users' },
-  { label: 'Settings', path: '/settings' },
+  { label: 'orders', path: '/orders' },
+  { label: 'groups', path: '/groups' },
+  { label: 'products', path: '/products' },
+  { label: 'users', path: '/users' },
+  { label: 'settings', path: '/settings' },
 ];

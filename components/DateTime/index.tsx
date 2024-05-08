@@ -1,10 +1,12 @@
 import { format } from 'date-fns';
+import { useTranslation } from 'next-i18next';
 import React, { FC, useEffect, useState } from 'react';
 import { ClockFill } from 'react-bootstrap-icons';
 
 import classes from './style.module.scss';
 
 const DateTime: FC = () => {
+  const { t } = useTranslation();
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -15,7 +17,7 @@ const DateTime: FC = () => {
 
   return (
     <div>
-      <span>Today</span>
+      <span>{t('app.today')}</span>
 
       <div className={classes.topmenu__time}>
         <span>{format(time, 'dd MMM, yyyy')}</span>

@@ -1,4 +1,6 @@
 import { GetServerSidePropsContext, NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 
@@ -12,6 +14,8 @@ interface IPageProps {
 }
 
 const Groups: NextPage<IPageProps> = ({ products }) => {
+  const { t } = useTranslation();
+
   const { products: storeProducts } = useProductsState();
   const { onSetProducts } = useProductsAction();
   useEffect(() => {
@@ -22,7 +26,7 @@ const Groups: NextPage<IPageProps> = ({ products }) => {
   return (
     <Container fluid className='p-5 d-flex flex-column gap-5'>
       <div className='d-flex align-items-end gap-5'>
-        <span className='display-6'>Products / {productsLength}</span>
+        <span className='display-6'>{`${t('app.products')} / ${productsLength}`}</span>
         <FilterBar />
       </div>
       <ProductsList />
@@ -39,6 +43,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   return {
     props: {
       products,
+      ...(await serverSideTranslations(ctx.locale ?? 'en', ['common'])),
     },
   };
 }

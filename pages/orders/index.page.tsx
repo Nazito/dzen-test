@@ -1,4 +1,6 @@
 import { GetServerSidePropsContext, NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { PlusCircleFill } from 'react-bootstrap-icons';
@@ -16,6 +18,7 @@ interface IPageProps {
 }
 
 const Orders: NextPage<IPageProps> = ({ orders, products }: IPageProps) => {
+  const { t } = useTranslation();
   const { orders: storeOrders } = useOrdersState();
   const { sendRequest } = useApiRequest();
   const { onSetOrders } = useOrdersAction();
@@ -53,7 +56,7 @@ const Orders: NextPage<IPageProps> = ({ orders, products }: IPageProps) => {
         <div style={{ cursor: 'pointer' }} onClick={handleAddOrder}>
           <PlusCircleFill className='text-success' size={25} />
         </div>
-        <span className='display-6'>Orders / {ordersLength}</span>
+        <span className='display-6'>{`${t('app.orders')} / ${ordersLength}`}</span>
       </div>
 
       <OrdersList />
@@ -73,6 +76,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     props: {
       orders,
       products,
+      ...(await serverSideTranslations(ctx.locale ?? 'en', ['common'])),
     },
   };
 }

@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 import io, { Socket } from 'socket.io-client';
 
@@ -6,6 +7,7 @@ import { getUserId } from '@/utils/user';
 let socket: Socket | null = null;
 
 const OnlineUsers = () => {
+  const { t } = useTranslation();
   const [count, setCount] = useState<number | null>(null);
 
   useEffect(() => {
@@ -30,7 +32,7 @@ const OnlineUsers = () => {
 
   if (!count) return null;
 
-  return <div className='d-flex align-items-end pl-3'>Users: {count}</div>;
+  return <div className='d-flex align-items-end pl-3'>{`${t('app.users')} ${count}`}</div>;
 };
 
 export default OnlineUsers;

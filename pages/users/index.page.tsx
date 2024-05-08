@@ -1,8 +1,19 @@
-import { NextPage } from 'next';
+import { GetServerSidePropsContext, NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
 
 const Groups: NextPage = () => {
-  return <div>Users</div>;
+  const { t } = useTranslation();
+  return <div>{t('app.users')}</div>;
 };
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(ctx.locale ?? 'en', ['common'])),
+    },
+  };
+}
 
 export default Groups;

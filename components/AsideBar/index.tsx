@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import React, { FC } from 'react';
 import { Col, Nav } from 'react-bootstrap';
 import { GearFill, PersonFill } from 'react-bootstrap-icons';
@@ -9,6 +10,7 @@ import { ASIDE_ROUTES } from '@/constants';
 import classes from './style.module.scss';
 
 const AsideBar: FC = () => {
+  const { t } = useTranslation();
   const { asPath } = useRouter();
 
   return (
@@ -28,7 +30,7 @@ const AsideBar: FC = () => {
                 href={path}
                 className={`${classes.navLink} nav-link ${asPath === path && classes['navLink--active']}`}
               >
-                {label}
+                {t(`app.${label}`)}
               </Link>
             );
           })}

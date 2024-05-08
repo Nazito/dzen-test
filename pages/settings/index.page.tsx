@@ -1,27 +1,20 @@
-import { NextPage } from 'next';
+import { GetServerSidePropsContext, NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
 
-// import { Layout } from '@/components/Layout';
-// import { OrdersList } from '@/components/OrdersList';
-// import { useAppSelector } from '@/store/hooks';
-// import classes from '../styles/orders_page.module.scss';
-
 const Groups: NextPage = () => {
-  // const { orders } = useAppSelector(state => state.orders);
+  const { t } = useTranslation();
 
-  // const ordersLength = orders.length;
-
-  return (
-    <div>
-      settings
-      {/* <div className={classes.orders_page}> */}
-      {/* <div className={classes.orders_page__header}> */}
-      {/* <span>Orders / {ordersLength}</span> */}
-      {/* </div> */}
-      {/* <OrdersList /> */}
-      {/* </div> */}
-    </div>
-  );
+  return <div>{t('app.settings')}</div>;
 };
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(ctx.locale ?? 'en', ['common'])),
+    },
+  };
+}
 
 export default Groups;
