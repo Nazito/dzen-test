@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 
+import DateTime from '../DateTime';
 import Logo from '../Logo';
-import { TopMenu } from '../TopMenu';
+import OnlineUsers from '../OnlineUsers';
 
 const Header: FC = () => {
   return (
@@ -16,7 +17,8 @@ const Header: FC = () => {
             <Form.Control type='text' placeholder='...Search' />
           </Col>
           <Col xs='12' lg='5' className='d-flex justify-content-end'>
-            <TopMenu />
+            <DateTime />
+            <OnlineUsers />
           </Col>
         </Row>
       </Container>

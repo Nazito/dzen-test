@@ -1,5 +1,7 @@
 .orderItem {
   transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
 
   &__menuIcon {
     display: flex;
@@ -12,32 +14,27 @@
     border-color: rgba(0, 0, 0, 0.15);
     background: transparent;
     transition: all 0.3s;
+  }
 
-    &:hover {
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  &:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    & .orderItem__chevron {
+      visibility: visible;
+      opacity: 1;
     }
+  }
 
-    &:active {
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    }
-
-    &__trash {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 30px;
-      width: 30px;
-      border-radius: 50%;
-      background: transparent;
-      transition: all 0.3s;
-
-      &:hover {
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-      }
-
-      &:active {
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-      }
-    }
+  &__chevron {
+    transition: all 0.3s;
+    background-color: rgba(0, 0, 0, 0.45);
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 12%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
   }
 }

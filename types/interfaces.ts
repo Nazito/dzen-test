@@ -1,8 +1,9 @@
 export interface IOrder {
   id: number;
   title: string;
-  date: string;
+  createdAt: string;
   description: string;
+  products: IProduct[];
 }
 
 interface IGuarantee {
@@ -16,6 +17,11 @@ interface IPrice {
   isDefault: number;
 }
 
+export interface IOption {
+  label: string;
+  value: string;
+}
+
 export interface IProduct {
   id: number;
   serialNumber: number;
@@ -27,5 +33,5 @@ export interface IProduct {
   guarantee: IGuarantee;
   price: IPrice[];
   order: number;
-  date: string;
+  createdAt: string;
 }

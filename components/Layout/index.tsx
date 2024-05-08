@@ -17,7 +17,7 @@ const Layout = ({ children }: LayoutProps) => {
           <Col xs lg='2' className='shadow p-5'>
             <AsideBar />
           </Col>
-          <Col xs lg='10'>
+          <Col xs lg='10' className='h-100 pb-3'>
             {children}
           </Col>
         </Row>

@@ -2,14 +2,24 @@ import '@/styles/globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import type { AppProps /* , AppContext */ } from 'next/app';
+import { Provider } from 'react-redux';
 
 import Layout from '@/components/Layout';
+import AddOrderModal from '@/components/Modals/AddOrderModal/AddOrderModal';
+import AddProductModal from '@/components/Modals/AddProductModal/AddProductModal';
+import ConfirmModal from '@/components/Modals/ConfirmModal/ConfirmModal';
+import { store } from '@/store';
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <Provider store={store}>
+      <AddProductModal />
+      <AddOrderModal />
+      <ConfirmModal />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </Provider>
   );
 }
 

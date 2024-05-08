@@ -1,24 +1,19 @@
 import React, { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { ORDERS_MOCK } from '@/mock';
+import { useOrdersState } from '@/store/orders/hooks';
 
-import ListItem from '../ListItem';
 import GroupItem from './GroupItem';
 import GroupOrder from './GroupOrder';
 
 const GroupsList: FC = () => {
+  const { orders: storeOrders, selectedOrder } = useOrdersState();
   return (
     <Row>
       <Col lg='6' className='d-flex flex-column gap-3'>
-        {ORDERS_MOCK.map((order) => (
-          <ListItem key={order.id}>
-            <GroupItem order={order} />
-          </ListItem>
-        ))}
+        {storeOrders?.map((order) => <GroupItem key={order.id} order={order} />)}
       </Col>
-
-      <GroupOrder />
+      {selectedOrder && <GroupOrder />}
     </Row>
   );
 };
