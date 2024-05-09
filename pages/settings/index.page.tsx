@@ -18,8 +18,6 @@ const Groups: NextPage = () => {
   const { user } = useUserState();
   const { t } = useTranslation();
 
-  console.log(user, 'user');
-
   const fetchUser = async () => {
     const optionsProduct = {
       method: 'GET',

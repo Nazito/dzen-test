@@ -4,5 +4,6 @@
   "app.orders": "Приходы",
   "app.groups": "Группы",
   "app.products": "Продукты",
-  "app.settings": "Настройки"
-} 
+  "app.settings": "Настройки",
+  "validation.field_required": "Обязательное поле"
+}

@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { formatISO } from 'date-fns';
 import React, { useCallback } from 'react';
 import { Button, Col, Form, Modal, Row, Spinner } from 'react-bootstrap';
@@ -8,7 +9,9 @@ import InputRHF from '@/components/FormComponents/InputRHF/InputRHF';
 import SelectRHF from '@/components/FormComponents/SelectRHF/SelectRHF';
 import { useAppAction, useAppState } from '@/store/app/hooks';
 import { EModals } from '@/store/app/types';
+import { useOrdersState } from '@/store/orders/hooks';
 import { EType } from '@/types/enum';
+import { addProductSchema } from '@/validation/addProductSchema';
 
 export interface FormValues {
   title: string;
@@ -27,9 +30,11 @@ export interface FormValues {
 function AddProductModal() {
   const { modals, appLoading } = useAppState();
   const { onAddProductClose } = useAppAction();
+  const { selectedOrder } = useOrdersState();
 
   const methods = useForm<FormValues>({
     mode: 'onChange',
+    resolver: yupResolver(addProductSchema),
     defaultValues: {
       title: '',
       serialNumber: '',
@@ -44,7 +49,12 @@ function AddProductModal() {
       },
     },
   });
-  const { handleSubmit, watch, reset } = methods;
+  const {
+    handleSubmit,
+    watch,
+    reset,
+    formState: { isValid },
+  } = methods;
 
   const formData = watch();
 
@@ -69,6 +79,7 @@ function AddProductModal() {
         { value: formData.price.uah, symbol: 'UAH' },
       ],
       createdAt: formatISO(new Date()),
+      order: selectedOrder,
     };
 
     modals[EModals.AddProduct].props.accept(productCreateData);
@@ -163,7 +174,7 @@ function AddProductModal() {
               variant='danger'
               type='submit'
               className='d-flex align-items-center gap-3'
-              disabled={appLoading}
+              disabled={appLoading || !isValid}
             >
               Add Product
               {appLoading && <Spinner animation='border' variant='light' size={'sm'} />}

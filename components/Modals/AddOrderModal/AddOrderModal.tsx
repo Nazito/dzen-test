@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { formatISO } from 'date-fns';
 import React, { useCallback } from 'react';
 import { Button, Col, Form, Modal, Row, Spinner } from 'react-bootstrap';
@@ -10,11 +11,12 @@ import { EModals } from '@/store/app/types';
 import { useProductsState } from '@/store/products/hooks';
 import { IProduct } from '@/types/interfaces';
 import { getEntitysByIds } from '@/utils/getEntitysByIds';
+import { addOrderSchema } from '@/validation/addOrderSchema';
 
 export interface FormValues {
   title: string;
   description: string;
-  products: string[];
+  products?: string[] | [];
 }
 
 function AddOrderModal() {
@@ -24,13 +26,19 @@ function AddOrderModal() {
 
   const methods = useForm<FormValues>({
     mode: 'onChange',
+    resolver: yupResolver(addOrderSchema),
     defaultValues: {
       title: '',
       description: '',
       products: [],
     },
   });
-  const { handleSubmit, watch, reset } = methods;
+  const {
+    handleSubmit,
+    watch,
+    reset,
+    formState: { isValid },
+  } = methods;
 
   const formData = watch();
 
@@ -88,7 +96,7 @@ function AddOrderModal() {
                   options={productsOptions}
                   placeholder={'...Products'}
                   name={'products'}
-                  value={formData.products}
+                  value={formData?.products as string[]}
                   isMultiple
                 />
               </Form.Group>
@@ -102,7 +110,7 @@ function AddOrderModal() {
               variant='danger'
               type='submit'
               className='d-flex align-items-center gap-3'
-              disabled={appLoading}
+              disabled={appLoading || !isValid}
             >
               Add Order
               {appLoading && <Spinner animation='border' variant='light' size={'sm'} />}

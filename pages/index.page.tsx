@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -8,6 +9,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import InputRHF from '@/components/FormComponents/InputRHF/InputRHF';
 import ListItem from '@/components/ListItem';
 import useApiRequest from '@/hooks/useApiRequest';
+import { useAppState } from '@/store/app/hooks';
+import { loginSchema } from '@/validation/loginSchema';
 
 export interface FormValues {
   username: string;
@@ -16,15 +19,21 @@ export interface FormValues {
 
 function Home() {
   const router = useRouter();
+  const { appLoading } = useAppState();
   const { sendRequest } = useApiRequest();
   const methods = useForm<FormValues>({
     mode: 'onChange',
+    resolver: yupResolver(loginSchema),
     defaultValues: {
       username: 'user',
       password: 'password',
     },
   });
-  const { handleSubmit, watch } = methods;
+  const {
+    handleSubmit,
+    watch,
+    formState: { isValid },
+  } = methods;
 
   const formData = watch();
 
@@ -82,7 +91,7 @@ function Home() {
                   <Button
                     type='submit'
                     className='d-flex align-items-center gap-3'
-                    // disabled={appLoading}
+                    disabled={appLoading || !isValid}
                   >
                     Login
                     {/* {appLoading && <Spinner animation='border' variant='light' size={'sm'} />} */}

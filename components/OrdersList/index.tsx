@@ -7,6 +7,7 @@ import OrderItem from './OrderItem';
 
 const OrdersList: FC = () => {
   const { orders: storeOrders } = useOrdersState();
+
   return (
     <div>
       <div className='w-100 d-flex flex-column gap-3'>

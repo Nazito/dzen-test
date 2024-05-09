@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React, { FC } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
@@ -8,7 +9,13 @@ import OnlineUsers from '../OnlineUsers';
 
 const Header: FC = () => {
   return (
-    <header className='shadow'>
+    <motion.header
+      initial={{ x: '100%' }}
+      animate={{ x: 0 }}
+      exit={{ x: '-100%' }}
+      transition={{ duration: 0.5, delay: 0 }}
+      className='shadow'
+    >
       <Container fluid='sm'>
         <Row className='align-items-center'>
           <Col xs='12' lg='5' className='d-flex justify-content-start'>
@@ -23,7 +30,7 @@ const Header: FC = () => {
           </Col>
         </Row>
       </Container>
-    </header>
+    </motion.header>
   );
 };
 export default Header;

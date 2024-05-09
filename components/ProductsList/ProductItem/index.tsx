@@ -14,7 +14,8 @@ type TProps = {
 };
 
 const ProductItem: FC<TProps> = ({ product }) => {
-  const { title, serialNumber, price, order, createdAt, id } = product;
+  const { title, serialNumber, price, order, createdAt, id, guarantee, type } = product;
+
   const { sendRequest } = useApiRequest();
   const { onSetProducts } = useProductsAction();
   const { products: storeProducts } = useProductsState();
@@ -45,49 +46,38 @@ const ProductItem: FC<TProps> = ({ product }) => {
       className={`${classes.productItem} d-flex justify-content-between align-items-center text-secondary`}
     >
       <Cast size={50} />
-
+      <p className='m-0'>{type}</p>
       <div>
         <p className='mb-2'>{title}</p>
         <p className={classes.productItem__serial}>{serialNumber}</p>
       </div>
-
-      <p className='mb-0'>Free</p>
-
-      {/* <div>
-        <div className='d-flex align-items-end gap-2'>
+      <div>
+        <div className='d-flex align-items-center gap-2'>
           <span className={classes.productItem__guaranteText}>from</span>
           <p className='mb-0'>{format(new Date(guarantee.end), 'dd/MM/yyyy')}</p>
         </div>
-        <div className='d-flex align-items-end center gap-2'>
+        <div className='d-flex align-items-center gap-2'>
           <span className={classes.productItem__guaranteText}>to</span>
           <p className='mb-0'>{format(new Date(guarantee.end), 'dd/MM/yyyy')}</p>
         </div>
-      </div> */}
-
-      <p>New</p>
-
+      </div>
       <div>
         {price.map((oneprice) => {
-          const isSymbol = oneprice.symbol === 'USD';
-
           return (
-            <div key={oneprice.symbol} className={isSymbol ? classes.productItem__price : ''}>
-              <span>{oneprice.value}</span>
-              <span>$</span>
+            <div key={oneprice.symbol} className={classes.productItem__price}>
+              <span>{`${oneprice.value} ${oneprice.symbol}`}</span>
             </div>
           );
         })}
       </div>
-
-      <p className={classes.productItem__groupName}>Some group name</p>
-
-      <p>Order {order}</p>
-
+      <div>
+        <p className='mb-0'>Order </p>
+        <p className='mb-0'>{order?.title} </p>
+      </div>
       <div className='d-flex flex-column align-items center'>
         <p className='mb-0'>{format(new Date(createdAt), 'dd/MM')}</p>
         <p className='mb-0'>{format(new Date(createdAt), 'dd/MM/yyyy')}</p>
       </div>
-
       <div className={classes.productItem__trash} onClick={handleDelete}>
         <Trash size={20} />
       </div>

@@ -32,7 +32,7 @@ export interface IProduct {
   specification: string;
   guarantee: IGuarantee;
   price: IPrice[];
-  order: number;
+  order: IOrder;
   createdAt: string;
 }
 

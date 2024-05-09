@@ -46,19 +46,23 @@ const SelectRHF: FC<Props> = ({ name, value, options = [], placeholder, isMultip
       </Dropdown.Toggle>
 
       <Dropdown.Menu className='w-100'>
-        {options.map((option) => {
-          return (
-            <Dropdown.Item
-              key={option.value}
-              eventKey={option.value}
-              style={{
-                backgroundColor: value.includes(option.value) ? 'rgba(0, 0, 0, 0.2)' : 'initial',
-              }}
-            >
-              {option.label}
-            </Dropdown.Item>
-          );
-        })}
+        {options?.length ? (
+          options.map((option) => {
+            return (
+              <Dropdown.Item
+                key={option.value}
+                eventKey={option.value}
+                style={{
+                  backgroundColor: value.includes(option.value) ? 'rgba(0, 0, 0, 0.2)' : 'initial',
+                }}
+              >
+                {option.label}
+              </Dropdown.Item>
+            );
+          })
+        ) : (
+          <Dropdown.Item disabled>not added</Dropdown.Item>
+        )}
       </Dropdown.Menu>
     </Dropdown>
   );

@@ -1,6 +1,9 @@
+import { useTranslation } from 'next-i18next';
 import React, { ChangeEvent, FC } from 'react';
 import { Col, Form } from 'react-bootstrap';
-import { useFormContext } from 'react-hook-form';
+import { FieldError, useFormContext } from 'react-hook-form';
+
+import { getNestedProperty } from '@/utils/getNestedProperty';
 
 interface Props {
   title: string;
@@ -11,14 +14,23 @@ interface Props {
 }
 
 const InputRHF: FC<Props> = ({ name, value, placeholder, title, type = 'text' }) => {
-  const { setValue } = useFormContext();
+  const {
+    setValue,
+    trigger,
+    formState: { errors },
+  } = useFormContext();
+
+  const { t } = useTranslation();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(name, e.target.value);
+    trigger(name);
   };
 
+  const fieldError = getNestedProperty(errors, name) as FieldError;
+
   return (
-    <Form.Group as={Col} md='12' controlId='validationCustom01'>
+    <Form.Group as={Col} md='12'>
       <Form.Label>{title}</Form.Label>
       <Form.Control
         required
@@ -27,7 +39,12 @@ const InputRHF: FC<Props> = ({ name, value, placeholder, title, type = 'text' })
         onChange={handleChange}
         type={type}
       />
-      {/* <Form.Control.Feedback>Looks good!</Form.Control.Feedback> */}
+
+      {fieldError && (
+        <Form.Control.Feedback type='invalid' className='d-flex'>
+          {t(fieldError?.message as string)}
+        </Form.Control.Feedback>
+      )}
     </Form.Group>
   );
 };

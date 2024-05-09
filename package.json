@@ -10,6 +10,7 @@
     "pre-commit": "lint-staged"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@mapbox/mapbox-gl-geocoder": "^5.0.2",
     "@reduxjs/toolkit": "^2.2.3",
     "@types/mapbox__mapbox-gl-geocoder": "^5.0.0",
@@ -21,6 +22,7 @@
     "cookie": "^0.6.0",
     "cookies-next": "^4.1.1",
     "date-fns": "^3.6.0",
+    "framer-motion": "^11.1.9",
     "jsonwebtoken": "^9.0.2",
     "mapbox-gl": "^3.3.0",
     "next": "14.2.3",
@@ -38,7 +40,9 @@
     "redux-localstorage-simple": "^2.5.1",
     "sass": "^1.76.0",
     "socket.io": "^4.7.5",
-    "socket.io-client": "^4.7.5"
+    "socket.io-client": "^4.7.5",
+    "yarn": "^1.22.22",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.6",

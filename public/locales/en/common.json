@@ -4,5 +4,6 @@
   "app.orders": "Orders",
   "app.groups": "Groups",
   "app.products": "Products",
-  "app.settings": "Settings"
+  "app.settings": "Settings",
+  "validation.field_required": "Field required"
 }

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
@@ -15,10 +16,24 @@ const Layout = ({ children }: LayoutProps) => {
       <Container as='main' fluid className='p-0 h-100'>
         <Row className='p-0 h-100'>
           <Col xs lg='2' className='shadow p-5'>
-            <AsideBar />
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.5, delay: 0 }}
+            >
+              <AsideBar />
+            </motion.div>
           </Col>
           <Col xs lg='10' className='h-100 pb-3'>
-            {children}
+            <motion.div
+              initial={{ y: '-100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ duration: 0.5, delay: 0 }}
+            >
+              {children}
+            </motion.div>
           </Col>
         </Row>
       </Container>
