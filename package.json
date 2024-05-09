@@ -41,7 +41,6 @@
     "sass": "^1.76.0",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
-    "yarn": "^1.22.22",
     "yup": "^1.4.0"
   },
   "devDependencies": {
