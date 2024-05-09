@@ -5,3 +5,5 @@ export const ASIDE_ROUTES = [
   { label: 'users', path: '/users' },
   { label: 'settings', path: '/settings' },
 ];
+
+export const SECRET = '3lk4j9dL$#jksa#@*&!l2k';

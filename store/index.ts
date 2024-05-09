@@ -5,11 +5,13 @@ import { load, save } from 'redux-localstorage-simple';
 import appSlice, { AppState } from './app/appSlice';
 import ordersSlice, { IOrdersState } from './orders/ordersSlice';
 import productsSlice, { IProductsState } from './products/productsSlice';
+import userSlice, { IUserState } from './user/userSlice';
 
 type MergedState = {
   app: AppState;
   orders: IOrdersState;
   products: IProductsState;
+  user: IUserState;
 };
 
 const PERSISTED_KEYS: string[] = [''];
@@ -19,6 +21,7 @@ export const store = configureStore({
     app: appSlice,
     orders: ordersSlice,
     products: productsSlice,
+    user: userSlice,
   },
   preloadedState: loadedState,
   devTools: true,

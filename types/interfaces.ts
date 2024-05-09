@@ -35,3 +35,8 @@ export interface IProduct {
   order: number;
   createdAt: string;
 }
+
+export interface IUser {
+  username?: string;
+  coords: [number, number];
+}

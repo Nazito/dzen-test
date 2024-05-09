@@ -7,13 +7,13 @@ interface Props {
   placeholder: string;
   name: string;
   value: string;
+  type?: string;
 }
 
-const InputRHF: FC<Props> = ({ name, value, placeholder, title }) => {
+const InputRHF: FC<Props> = ({ name, value, placeholder, title, type = 'text' }) => {
   const { setValue } = useFormContext();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setValue(name, e.target.value);
   };
 
@@ -22,10 +22,10 @@ const InputRHF: FC<Props> = ({ name, value, placeholder, title }) => {
       <Form.Label>{title}</Form.Label>
       <Form.Control
         required
-        type='text'
         placeholder={placeholder}
         defaultValue={value}
         onChange={handleChange}
+        type={type}
       />
       {/* <Form.Control.Feedback>Looks good!</Form.Control.Feedback> */}
     </Form.Group>

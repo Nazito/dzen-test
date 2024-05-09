@@ -1,8 +1,46 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
+import { FormProvider, useForm } from 'react-hook-form';
+
+import InputRHF from '@/components/FormComponents/InputRHF/InputRHF';
+import ListItem from '@/components/ListItem';
+import useApiRequest from '@/hooks/useApiRequest';
+
+export interface FormValues {
+  username: string;
+  password: string;
+}
 
 function Home() {
+  const router = useRouter();
+  const { sendRequest } = useApiRequest();
+  const methods = useForm<FormValues>({
+    mode: 'onChange',
+    defaultValues: {
+      username: 'user',
+      password: 'password',
+    },
+  });
+  const { handleSubmit, watch } = methods;
+
+  const formData = watch();
+
+  const addOrder = async (formData: FormValues) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    };
+
+    await sendRequest('/api/auth/login', options);
+
+    router.push('/settings');
+  };
   return (
     <>
       <Head>
@@ -12,7 +50,49 @@ function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <div>Home</div>
+      <Container fluid className='p-5 d-flex flex-column gap-5'>
+        <Col lg='6'>
+          <ListItem>
+            <FormProvider {...methods}>
+              <form onSubmit={handleSubmit(addOrder)}>
+                <Modal.Header className='mb-2'>
+                  <Modal.Title>Login</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Row className='mb-3'>
+                    <InputRHF
+                      title={'Username'}
+                      placeholder={'... username'}
+                      name='username'
+                      value={formData.username}
+                    />
+                  </Row>
+                  <Row className='mb-3'>
+                    <InputRHF
+                      title={'Password'}
+                      placeholder={'... password'}
+                      name='password'
+                      value={formData.password}
+                      type='password'
+                    />
+                  </Row>
+                  <Row className='mb-3'></Row>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    type='submit'
+                    className='d-flex align-items-center gap-3'
+                    // disabled={appLoading}
+                  >
+                    Login
+                    {/* {appLoading && <Spinner animation='border' variant='light' size={'sm'} />} */}
+                  </Button>
+                </Modal.Footer>
+              </form>
+            </FormProvider>
+          </ListItem>
+        </Col>
+      </Container>
     </>
   );
 }

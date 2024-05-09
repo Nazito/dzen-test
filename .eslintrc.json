@@ -50,6 +50,7 @@
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/no-unsafe-return": "off",
     "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-floating-promises": "off",
     "import/no-anonymous-default-export": [
       "error",
       {
