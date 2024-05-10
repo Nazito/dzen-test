@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 import React, { FC } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
@@ -9,11 +9,11 @@ import OnlineUsers from '../OnlineUsers';
 
 const Header: FC = () => {
   return (
-    <motion.header
-      initial={{ x: '100%' }}
-      animate={{ x: 0 }}
-      exit={{ x: '-100%' }}
-      transition={{ duration: 0.5, delay: 0 }}
+    <header
+      // initial={{ x: '100%' }}
+      // animate={{ x: 0 }}
+      // exit={{ x: '-100%' }}
+      // transition={{ duration: 0.5, delay: 0 }}
       className='shadow'
     >
       <Container fluid='sm'>
@@ -30,7 +30,7 @@ const Header: FC = () => {
           </Col>
         </Row>
       </Container>
-    </motion.header>
+    </header>
   );
 };
 export default Header;

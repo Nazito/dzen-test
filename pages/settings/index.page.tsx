@@ -1,5 +1,6 @@
 import { deleteCookie } from 'cookies-next';
 import { GetServerSidePropsContext, NextPage } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -39,24 +40,29 @@ const Groups: NextPage = () => {
   return (
     <Container fluid className='p-5 d-flex flex-column gap-5'>
       <span className='display-6'>{t('app.settings')}</span>
-      <Row>
-        <Col lg='2'>
-          {user && <p>Welcome, {user?.username}!</p>}
-          <Button onClick={handleLogout} className='d-flex align-items-center gap-3'>
-            Logout
-          </Button>
-        </Col>
-        <Col lg='10'>
-          <Row>
-            <Col lg='4'>
-              <InputGeocoder />
-            </Col>
-            <Col lg='6'>
-              <Map />
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+
+      {user ? (
+        <Row>
+          <Col lg='2'>
+            {user && <p>Welcome, {user?.username}!</p>}
+            <Button onClick={handleLogout} className='d-flex align-items-center gap-3'>
+              Logout
+            </Button>
+          </Col>
+          <Col lg='10'>
+            <Row>
+              <Col lg='4'>
+                <InputGeocoder />
+              </Col>
+              <Col lg='6'>
+                <Map />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      ) : (
+        <Link href={'/'}>Login</Link>
+      )}
     </Container>
   );
 };

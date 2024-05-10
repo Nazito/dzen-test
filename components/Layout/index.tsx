@@ -27,9 +27,9 @@ const Layout = ({ children }: LayoutProps) => {
           </Col>
           <Col xs lg='10' className='h-100 pb-3'>
             <motion.div
-              initial={{ y: '-100%' }}
+              initial={{ y: '100%' }}
               animate={{ y: 0 }}
-              exit={{ y: '100%' }}
+              exit={{ y: '-100%' }}
               transition={{ duration: 0.5, delay: 0 }}
             >
               {children}
