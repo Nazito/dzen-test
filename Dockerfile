@@ -10,7 +10,7 @@ LABEL description="Unofficial Next.js + Typescript + PWA"
 WORKDIR /app
 
 
-COPY --from=builder /app/package.json ./ 
+COPY --from=builder /app/package.json ./package.json
 
 # Copy all files
 COPY . .
