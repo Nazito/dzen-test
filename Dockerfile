@@ -2,18 +2,14 @@ ARG IMAGE_LABEL
 ARG BUILD_VERSION
 ARG NODE_VERSION=20.11-alpine3.19
 
-
 FROM node:${NODE_VERSION} as dependencies
-
 LABEL stage="${IMAGE_LABEL}-dependencies"
 
 WORKDIR /app
 COPY package.json package-lock.json ./
-
-
+RUN npm install
 
 FROM node:${NODE_VERSION} as builder
-
 LABEL stage="${IMAGE_LABEL}-builder"
 ENV NODE_ENV=production
 
@@ -22,9 +18,7 @@ COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
 RUN npm run build
 
-
 FROM node:${NODE_VERSION} as runner
-
 LABEL image-label=${IMAGE_LABEL}
 LABEL image-version=${BUILD_VERSION}
 
