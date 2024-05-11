@@ -13,7 +13,7 @@ RUN npm ci
 
 
 
-FROM node:${NODE_VERSION} as builder
+FROM node:${VERSION} as builder
 
 COPY --from=builder /app/package.json ./package.json
 
