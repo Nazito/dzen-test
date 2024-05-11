@@ -10,12 +10,7 @@ const withPWA = require('next-pwa')({
 });
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverActions: true,
-  },
-
   swcMinify: true,
-  runtime: 'edge',
   pageExtensions: ['page.tsx', 'tsx', 'ts'],
   i18n,
 };

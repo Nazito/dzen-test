@@ -3,12 +3,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Server } from 'socket.io';
 
-export const dynamic = 'force-dynamic';
-
-export const config = {
-  runtime: 'edge',
-};
-
 let onlineUsers = [];
 
 export default function SocketHandler(req: NextApiRequest, res: NextApiResponse) {
