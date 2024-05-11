@@ -9,7 +9,7 @@ LABEL description="Unofficial Next.js + Typescript + PWA"
 # Set working directory
 WORKDIR /app
 
-COPY --from=builder /app/next-i18next.config.js ./next-i18next.config.js
+COPY --from=builder /app/next-i18next.config.js ./
 COPY --from=builder /app/next.config.js ./next.config.js
 COPY --from=builder /app/public ./
 COPY --from=builder /app/.next ./
