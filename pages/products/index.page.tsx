@@ -20,9 +20,10 @@ const Groups: NextPage<IPageProps> = ({ products }) => {
   const { onSetProducts } = useProductsAction();
   useEffect(() => {
     onSetProducts(products);
-  }, []);
+  }, [products]);
   const productsLength = storeProducts.length;
-
+  console.log(products.length, 'products NextPage');
+  console.log(storeProducts, 'storeProducts');
   return (
     <Container fluid className='p-5 d-flex flex-column gap-5'>
       <div className='d-flex align-items-end gap-5'>
@@ -37,9 +38,10 @@ const Groups: NextPage<IPageProps> = ({ products }) => {
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const { host } = ctx.req.headers;
   const baseUrl = `http://${host}`;
-  const response = await fetch(`${baseUrl}/api/products`);
+  const response = await fetch(`${baseUrl}/api/products`, { cache: 'no-cache' });
   const products = await response.json();
 
+  console.log(products.length, 'products getServerSideProps');
   return {
     props: {
       products,
