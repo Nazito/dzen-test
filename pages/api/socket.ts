@@ -3,9 +3,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Server } from 'socket.io';
 
-export const config = {
-  runtime: 'edge',
-};
+export const dynamic = 'force-dynamic';
+
+// export const config = {
+//   runtime: 'edge',
+// };
 
 let onlineUsers = [];
 
