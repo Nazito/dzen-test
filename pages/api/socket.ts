@@ -3,10 +3,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Server } from 'socket.io';
 
-export const config = {
-  runtime: 'experimental-edge',
-};
-
 let onlineUsers = [];
 
 export default function SocketHandler(req: NextApiRequest, res: NextApiResponse) {
