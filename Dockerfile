@@ -1,33 +1,45 @@
-# Set base image from the official Node.js LTS Alpine repository
-ARG VERSION=lts-alpine
-FROM node:$VERSION as builder
+ARG IMAGE_LABEL
+ARG BUILD_VERSION
+ARG NODE_VERSION=20.11-alpine3.19
 
-# Set label maintainer, version & description
-LABEL version="0.1.0"
-LABEL description="Unofficial Next.js + Typescript + PWA"
+
+FROM node:${NODE_VERSION} as dependencies
+
+LABEL stage="${IMAGE_LABEL}-dependencies"
+
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+
+
+
+FROM node:${NODE_VERSION} as builder
+
+LABEL stage="${IMAGE_LABEL}-builder"
 ENV NODE_ENV=production
 
-# Set working directory
 WORKDIR /app
-
-# Copy package.json and package-lock.json
-COPY package.json package-lock.json ./
-
-# Build app
+COPY . .
+COPY --from=dependencies /app/node_modules ./node_modules
 RUN npm run build
 
-# Second stage for copying necessary files
-FROM node:$VERSION
 
-# Set working directory
+FROM node:${NODE_VERSION} as runner
+
+LABEL image-label=${IMAGE_LABEL}
+LABEL image-version=${BUILD_VERSION}
+
+ENV NODE_ENV=production
 WORKDIR /app
 
-# Copy package.json and next.config.js from builder stage
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/next-i18next.config.js ./next-i18next.config.js 
+COPY --from=builder /app/next.config.mjs ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/.storybook ./.storybook
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
-# Copy built files
-COPY --from=builder /app/.next ./
-
-# Expose the listening port
 EXPOSE 3000
+
+CMD ["npm", "run", "start"]
