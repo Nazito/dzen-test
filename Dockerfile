@@ -5,12 +5,12 @@ FROM node:$VERSION
 # Set label maintainer, version & description
 LABEL version="0.1.0"
 LABEL description="Unofficial Next.js + Typescript + PWA"
-
+ENV NODE_ENV=production
 # Set working directory
 WORKDIR /app
 
 
-COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/package.json . 
 
 # Copy all files
 COPY . .
