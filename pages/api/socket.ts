@@ -5,9 +5,9 @@ import { Server } from 'socket.io';
 
 export const dynamic = 'force-dynamic';
 
-// export const config = {
-//   runtime: 'edge',
-// };
+export const config = {
+  runtime: 'edge',
+};
 
 let onlineUsers = [];
 
