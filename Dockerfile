@@ -9,7 +9,6 @@ LABEL stage="${IMAGE_LABEL}-dependencies"
 
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci
 
 
 
