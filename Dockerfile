@@ -8,9 +8,14 @@ LABEL description="Unofficial Next.js + Typescript + PWA"
 ENV NODE_ENV=production
 # Set working directory
 WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
 
 
-COPY --from=builder /app/package.json . 
+
+FROM node:${NODE_VERSION} as builder
+
+COPY --from=builder /app/package.json ./package.json
 
 # Copy all files
 COPY . .
