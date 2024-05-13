@@ -36,9 +36,15 @@ const Groups: NextPage<IPageProps> = ({ products }) => {
 };
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  ctx.res.setHeader('Cache-Control', 'no-store');
   const { host } = ctx.req.headers;
   const baseUrl = `http://${host}`;
-  const response = await fetch(`${baseUrl}/api/products`, { cache: 'no-cache' });
+  const response = await fetch(`${baseUrl}/api/products`, {
+    cache: 'no-store',
+    next: {
+      revalidate: 1,
+    },
+  });
   const products = await response.json();
 
   console.log(products.length, 'products getServerSideProps');

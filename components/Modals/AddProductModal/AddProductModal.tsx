@@ -12,6 +12,7 @@ import { EModals } from '@/store/app/types';
 import { useOrdersState } from '@/store/orders/hooks';
 import { EType } from '@/types/enum';
 import { addProductSchema } from '@/validation/addProductSchema';
+import { useRouter } from 'next/router';
 
 export interface FormValues {
   title: string;
@@ -28,6 +29,7 @@ export interface FormValues {
 }
 
 function AddProductModal() {
+  const router = useRouter();
   const { modals, appLoading } = useAppState();
   const { onAddProductClose } = useAppAction();
   const { selectedOrder } = useOrdersState();
@@ -83,6 +85,7 @@ function AddProductModal() {
     };
 
     modals[EModals.AddProduct].props.accept(productCreateData);
+    router.replace(router.asPath);
     reset();
   };
 
