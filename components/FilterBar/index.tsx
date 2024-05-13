@@ -7,25 +7,27 @@ import { IProduct } from '@/types/interfaces';
 
 const FilterBar: FC = () => {
   const { onSetProducts } = useProductsAction();
-  const [allProducts, setAllProducts] = useState<IProduct[]>([]);
-  const [selectedType, setSelectedType] = useState<string | null>('All');
   const { products: storeProducts } = useProductsState();
+  const [originalProducts, setOriginalProducts] = useState<IProduct[]>([]);
+  const [selectedType, setSelectedType] = useState<string | null>('All');
 
   useEffect(() => {
-    setAllProducts(storeProducts);
-  }, []);
+    if (storeProducts.length > 0 && originalProducts.length === 0) {
+      setOriginalProducts(storeProducts);
+    }
+  }, [storeProducts, originalProducts]);
 
   const handleSelect = useCallback(
     (eventKey: string | null) => {
       setSelectedType(eventKey);
       if (eventKey === 'All') {
-        onSetProducts(allProducts);
+        onSetProducts(originalProducts);
       } else {
-        const filteredProducts = allProducts?.filter((product) => product.type === eventKey);
+        const filteredProducts = originalProducts.filter((product) => product.type === eventKey);
         onSetProducts(filteredProducts);
       }
     },
-    [allProducts, onSetProducts],
+    [onSetProducts, originalProducts],
   );
 
   return (

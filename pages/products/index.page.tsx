@@ -13,7 +13,7 @@ interface IPageProps {
   products: IProduct[];
 }
 
-const Groups: NextPage<IPageProps> = ({ products }) => {
+const Products: NextPage<IPageProps> = ({ products }) => {
   const { t } = useTranslation();
 
   const { products: storeProducts } = useProductsState();
@@ -50,10 +50,10 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   console.log(products.length, 'products getServerSideProps');
   return {
     props: {
-      products,
+      products: products || [],
       ...(await serverSideTranslations(ctx.locale ?? 'en', ['common'])),
     },
   };
 }
 
-export default Groups;
+export default Products;
