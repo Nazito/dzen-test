@@ -38,7 +38,7 @@ const FilterBar: FC = () => {
             <Dropdown.Item key='All' eventKey='All'>
               All
             </Dropdown.Item>
-            {Object.entries(EType).map(([name, value], idx) => (
+            {Object.entries(EType).map(([name, value]) => (
               <Dropdown.Item key={name} eventKey={value}>
                 {name}
               </Dropdown.Item>
