@@ -33,7 +33,7 @@ const SelectRHF: FC<Props> = ({ name, value, options = [], placeholder, isMultip
         <div className='d-flex flex-wrap w-100 gap-2'>
           {isMultiple &&
             !!badges.length &&
-            badges.map((entity: IOption) => {
+            badges?.map((entity: IOption) => {
               return (
                 <Badge key={(entity as IOption)?.value} bg='info'>
                   {(entity as IOption)?.label}
